@@ -25,3 +25,45 @@
 #### 代码实现
 
 #### 验证过程
+
+- 代码编译并上传jar包
+- 添加jar包到hive库中，使用add jar命令
+![添加jar包](image/add_jar.png)
+- 准备测试数据geekfile
+```txt
+This notebook can be geeeek used to geek install gek on all geeeek worker nodes, run data ge
+neration, and create the TPCDS geeeeeeeeek database.
+This notebook can be geeeek used to geek install gek on all geeeek worker nodes, run data ge
+neration, and create the TPCDS geeeeeeeeek database.
+This notebook can be geeeek used to geek install gek on all geeeek worker nodes, run data ge
+neration, and create the TPCDS geeeeeeeeek database.
+This notebook can be geeeek used to geek install gek on all geeeek worker nodes, run data ge
+neration, and create the TPCDS geeeeeeeeek database.
+This notebook can be geeeek used to geek install gek on all geeeek worker nodes, run data ge
+neration, and create the TPCDS geeeeeeeeek database.
+```
+- 创建表1并导入测试数据
+```sql
+create table lfk_geek_input_table(text string)
+stored as 
+INPUTFORMAT 'org.hive.format.GeekTextInputFormat'
+OUTPUTFORMAT 'org.hive.format.GeekTextOutputFormat';
+
+load data local inpath '/home/student/liufukang/geekfile' overwrite into table lfk_geek_input_table;
+
+select text from lfk_geek_input_table;
+```
+从结果可以看出数据已经解密成功
+![table1](image/table1.png)
+
+- 创建表2并从表1导入数据
+```sql
+create table lfk_geek_out_table(text string)
+stored as 
+INPUTFORMAT 'org.hive.format.GeekTextInputFormat'
+OUTPUTFORMAT 'org.hive.format.GeekTextOutputFormat';
+
+insert overwrite table lfk_geek_out_table select text from lfk_geek_input_table;
+```
+查看表lfk_geek_out_table的hdfs文件，可以看到数据加密成功
+![table2](image/table2.png)
