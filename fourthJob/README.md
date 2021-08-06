@@ -23,7 +23,10 @@
 
 
 #### 代码实现
-
+- [GeekTextInputFormat](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/java/org/hive/format/GeekTextInputFormat.java)  
+参考Base64TextInputFormat,实现next()方法
+- [GeekTextOutputFormat](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/java/org/hive/format/GeekTextOutputFormat.java)  
+参考Base64TextOutputFormat,实现write()方法
 
 #### 验证过程
 
