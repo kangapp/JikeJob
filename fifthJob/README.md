@@ -18,6 +18,7 @@
 [代码](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/scala/spark/WordCountInvertedIndex.scala)
 
 - 输入数据
+
 ![input1](./image/input1.png)
 
 - 运行结果  
