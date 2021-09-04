@@ -1,5 +1,98 @@
 ## 第六次作业
 
+### 为Spark SQL添加一条自定义命令
+> SHOW VERSION;  
+显示当前Spark版本和Java版本
+
+- 在SqlBase.g4文件添加关键词并用自带的antlr4工具进行编译
+```text
+statement
+    | SHOW VERSION                     #showJavaSparkVersion
+
+ansiNonReserved
+    | VERSION
+
+nonReserved
+    | VERSION
+
+VERSION: 'VERSION' | 'VERSIONS';
+```
+查看SqlBaseParser，新增了ShowJavaSparkVersionContext
+```scala
+public static class ShowJavaSparkVersionContext extends StatementContext {
+    public TerminalNode SHOW() { return getToken(SqlBaseParser.SHOW, 0); }
+    public TerminalNode VERSION() { return getToken(SqlBaseParser.VERSION, 0); }
+    public ShowJavaSparkVersionContext(StatementContext ctx) { copyFrom(ctx); }
+    @Override
+    public void enterRule(ParseTreeListener listener) {
+        if ( listener instanceof SqlBaseListener ) ((SqlBaseListener)listener).enterShowJavaSparkVersion(this);
+    }
+    @Override
+    public void exitRule(ParseTreeListener listener) {
+        if ( listener instanceof SqlBaseListener ) ((SqlBaseListener)listener).exitShowJavaSparkVersion(this);
+    }
+    @Override
+    public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+        if ( visitor instanceof SqlBaseVisitor ) return ((SqlBaseVisitor<? extends T>)visitor).visitShowJavaSparkVersion(this);
+        else return visitor.visitChildren(this);
+    }
+}
+```
+查看SqlBaseBaseVisitor，新增了visitShowJavaSparkVersion方法
+```scala
+/**
+* {@inheritDoc}
+*
+* <p>The default implementation returns the result of calling
+* {@link #visitChildren} on {@code ctx}.</p>
+*/
+@Override public T visitShowJavaSparkVersion(SqlBaseParser.ShowJavaSparkVersionContext ctx) { return visitChildren(ctx); }
+```
+
+- 在SparkSqlParser中重写visitShowJavaSparkVersion并实现自定义command  
+`SparkSqlParser`
+```scala
+override def visitShowJavaSparkVersion(
+    ctx: ShowJavaSparkVersionContext): LogicalPlan = withOrigin(ctx) {
+ShowJavaSparkVersionCommand()
+}
+```
+`ShowJavaSparkVersionCommand`
+```scala
+case class ShowJavaSparkVersionCommand() extends RunnableCommand {
+
+  override val output: Seq[Attribute] =
+    Seq(AttributeReference("version", StringType, nullable = true)())
+
+  override def run(sparkSession: SparkSession): Seq[Row] = {
+
+    val java_version = System.getProperty("java.version");
+    val spark_version = sparkSession.sparkContext.version
+    val outputString_java = s"java.version:${java_version}"
+    val outputString_spark = s"spark.version:${spark_version}"
+    Seq(Row(outputString_java), Row(outputString_spark))
+  }
+}
+```
+
+- 运行结果
+
+![log3](image/log3.png)
+
+### 构建SQL满足如下要求
+
+#### 构建一条SQL，同时apply下面三条优化规则
+> CombineFilters  
+CollapseProject  
+BooleanSimplification
+
+#### 构建一条SQL，同时apply下面五条优化规则
+> ConstantFolding  
+PushDownPredicates  
+ReplaceDistinctWithAggregate  
+ReplaceExceptWithAntiJoin  
+FoldablePropagation
+
 ### 实现自定义优化规则（静默规则）
 > 参考CombineFilters实现自定义的Filter合并规则  
 合并同一个属性值存在多个大于等情况  
