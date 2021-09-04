@@ -50,6 +50,7 @@ public static class ShowJavaSparkVersionContext extends StatementContext {
 ```
 
 - 在SparkSqlParser中重写visitShowJavaSparkVersion并实现自定义command  
+
 `SparkSqlParser`
 ```scala
 override def visitShowJavaSparkVersion(
@@ -188,7 +189,7 @@ case class MyPushDown(session: SparkSession) extends Rule[LogicalPlan] with Pred
 #### 实现方式2:打包到emr环境测试
 
 [MyCombineFilter](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/scala/spark/MyCombineFilter.scala)  
-[MyCombineFilter](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/scala/spark/MySparkSessionExtension.scala)
+[MySparkSessionExtension](https://github.com/kangapp/JikeJob/blob/main/HadoopTest/src/main/scala/spark/MySparkSessionExtension.scala)
 
 - 启动spark sql
 ```sh
