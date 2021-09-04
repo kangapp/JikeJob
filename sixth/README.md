@@ -86,6 +86,20 @@ case class ShowJavaSparkVersionCommand() extends RunnableCommand {
 CollapseProject  
 BooleanSimplification
 
+- CombineFilters
+> 合并两个相邻的Fileter，但从源码看到PushDownPredicates调用了CombineFilters的实现，测试的时候把PushDownPredicates暂时移除
+- CollapseProject
+> 合并2个相邻的project
+- BooleanSimplification
+> 简化布尔表达式
+
+`sql`
+```sql
+select name from (select name, age from people where age>15 and !(age is null)) t where t.age>12
+```
+`日志`
+![log4](image/log4.png)
+
 #### 构建一条SQL，同时apply下面五条优化规则
 > ConstantFolding  
 PushDownPredicates  
