@@ -1,10 +1,13 @@
 ## 第六次作业
+[toc]
+
+---
 
 ### 为Spark SQL添加一条自定义命令
 > SHOW VERSION;  
 显示当前Spark版本和Java版本
 
-- 在SqlBase.g4文件添加关键词并用自带的antlr4工具进行编译
+#### 在SqlBase.g4文件添加关键词并用自带的antlr4工具进行编译
 ```text
 statement
     | SHOW VERSION                     #showJavaSparkVersion
@@ -17,7 +20,7 @@ nonReserved
 
 VERSION: 'VERSION' | 'VERSIONS';
 ```
-查看SqlBaseParser，新增了ShowJavaSparkVersionContext
+查看`SqlBaseParser`，新增了`ShowJavaSparkVersionContext`
 ```scala
 public static class ShowJavaSparkVersionContext extends StatementContext {
     public TerminalNode SHOW() { return getToken(SqlBaseParser.SHOW, 0); }
@@ -38,7 +41,7 @@ public static class ShowJavaSparkVersionContext extends StatementContext {
     }
 }
 ```
-查看SqlBaseBaseVisitor，新增了visitShowJavaSparkVersion方法
+查看`SqlBaseBaseVisitor`，新增了`visitShowJavaSparkVersion`方法
 ```scala
 /**
 * {@inheritDoc}
@@ -49,7 +52,7 @@ public static class ShowJavaSparkVersionContext extends StatementContext {
 @Override public T visitShowJavaSparkVersion(SqlBaseParser.ShowJavaSparkVersionContext ctx) { return visitChildren(ctx); }
 ```
 
-- 在SparkSqlParser中重写visitShowJavaSparkVersion并实现自定义command  
+#### 在SparkSqlParser中重写visitShowJavaSparkVersion并实现自定义command  
 
 `SparkSqlParser`
 ```scala
@@ -76,7 +79,7 @@ case class ShowJavaSparkVersionCommand() extends RunnableCommand {
 }
 ```
 
-- 运行结果
+#### 运行结果
 
 ![log3](image/log3.png)
 
