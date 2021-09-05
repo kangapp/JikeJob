@@ -1,6 +1,14 @@
 ## 第六次作业
-[toc]
-
+  - [为Spark SQL添加一条自定义命令](#为spark-sql添加一条自定义命令)
+    - [在SqlBase.g4文件添加关键词并用自带的antlr4工具进行编译](#在sqlbaseg4文件添加关键词并用自带的antlr4工具进行编译)
+    - [在SparkSqlParser中重写visitShowJavaSparkVersion并实现自定义command](#在sparksqlparser中重写visitshowjavasparkversion并实现自定义command)
+    - [运行结果](#运行结果)
+  - [构建SQL满足如下要求](#构建sql满足如下要求)
+    - [构建一条SQL，同时apply下面三条优化规则](#构建一条sql同时apply下面三条优化规则)
+    - [构建一条SQL，同时apply下面五条优化规则](#构建一条sql同时apply下面五条优化规则)
+  - [实现自定义优化规则（静默规则）](#实现自定义优化规则静默规则)
+    - [实现方式1:本地测试](#实现方式1本地测试)
+    - [实现方式2:打包到emr环境测试](#实现方式2打包到emr环境测试)
 ---
 
 ### 为Spark SQL添加一条自定义命令
