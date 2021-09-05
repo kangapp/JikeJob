@@ -108,6 +108,30 @@ ReplaceDistinctWithAggregate
 ReplaceExceptWithAntiJoin  
 FoldablePropagation
 
+- ConstantFolding
+> 用相等的Literal替换可以静态计算的Expression
+- PushDownPredicates
+> 谓词下推
+- ReplaceDistinctWithAggregate
+> 替换distinct操作为aggregate操作
+- ReplaceExceptWithAntiJoin
+> 替换except操作为left-anti-join操作
+- FoldablePropagation
+> 用原始表达式替换别名
+
+`sql`
+```sql
+select distinct name, length('people') as size from 
+(select name, age from people where age>15) t where t.age>12 
+except select * from people where age is null 
+order by size
+```
+
+`日志`
+![](image/log5.png)
+![](image/log6.png)
+![](image/log7.png)
+
 ### 实现自定义优化规则（静默规则）
 > 参考CombineFilters实现自定义的Filter合并规则  
 合并同一个属性值存在多个大于等情况  
