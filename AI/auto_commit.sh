@@ -21,7 +21,14 @@ fi
 
 # 提交
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
-COMMIT_MSG="Auto commit: $TIMESTAMP"
+
+# 检查是否有自定义提交信息参数
+if [ -n "$1" ]; then
+    COMMIT_MSG="$1"
+else
+    COMMIT_MSG="Auto commit: $TIMESTAMP"
+fi
+
 echo -e "${BLUE}>>> 正在提交: ${NC}$COMMIT_MSG"
 git commit -m "$COMMIT_MSG" > /dev/null
 
