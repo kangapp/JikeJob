@@ -123,25 +123,25 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] font-sans text-[#1d1d1f]">
+    <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Sticky Header with Blur */}
-      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/70 border-b border-gray-200/50 supports-[backdrop-filter]:bg-white/60">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-            <div className="font-semibold text-lg tracking-tight text-gray-900">工单管理</div>
+      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-background/80 border-b border-border supports-[backdrop-filter]:bg-background/60">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="font-bold text-xl tracking-tight text-foreground">工单管理</div>
             <div className="flex items-center gap-2">
                 <Button 
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsDashboardOpen(true)}
-                    className="rounded-full h-8 px-3 text-sm font-medium text-gray-600 hover:bg-gray-100 transition-all"
+                    className="h-9 px-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
                 >
-                    <BarChart3 className="mr-1.5 h-4 w-4" /> 仪表盘
+                    <BarChart3 className="mr-2 h-4 w-4" /> 仪表盘
                 </Button>
                 <Button 
                     onClick={() => setIsCreateOpen(true)} 
-                    className="bg-black text-white hover:bg-gray-800 rounded-full h-8 px-4 text-sm font-medium transition-all shadow-sm hover:shadow-md"
+                    className="h-9 px-4 text-sm font-semibold transition-all shadow-sm hover:shadow-md hover:brightness-110"
                 >
-                    <Plus className="mr-1.5 h-3.5 w-3.5" /> 新建工单
+                    <Plus className="mr-2 h-4 w-4" /> 新建工单
                 </Button>
             </div>
         </div>
@@ -150,25 +150,25 @@ function App() {
       <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
         
         {/* Search & Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4 items-center bg-white p-4 rounded-3xl shadow-sm border border-gray-100">
+        <div className="flex flex-col md:flex-row gap-4 items-center bg-card p-4 rounded-xl shadow-sm border border-border">
           <div className="relative flex-1 w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="搜索工单..."
-              className="pl-10 h-10 rounded-xl bg-gray-100/50 border-transparent focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-sm"
+              className="pl-10 h-10 rounded-lg bg-background border-border focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <div className="flex gap-3 w-full md:w-auto">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full md:w-[160px] h-10 rounded-xl border-gray-200 bg-white text-sm font-medium text-gray-700">
+                <SelectTrigger className="w-full md:w-[160px] h-10 rounded-lg border-border bg-background text-sm font-medium text-foreground">
                 <div className="flex items-center gap-2">
-                    <Filter className="h-3.5 w-3.5 text-gray-500" />
+                    <Filter className="h-3.5 w-3.5 text-muted-foreground" />
                     <SelectValue placeholder="状态" />
                 </div>
                 </SelectTrigger>
-                <SelectContent className="rounded-xl border-gray-100 shadow-lg">
+                <SelectContent className="rounded-lg border-border bg-popover text-popover-foreground shadow-lg">
                 <SelectItem value="all">全部状态</SelectItem>
                 <SelectItem value="open">进行中</SelectItem>
                 <SelectItem value="closed">已完成</SelectItem>
@@ -180,10 +180,10 @@ function App() {
         {/* Tag Filter Indicator */}
         {tagFilter && (
              <div className="flex items-center gap-3 px-2">
-                <span className="text-sm font-medium text-gray-500">当前标签筛选：</span>
+                <span className="text-sm font-medium text-muted-foreground">当前标签筛选：</span>
                 <Badge 
                     variant="secondary" 
-                    className="cursor-pointer bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1 rounded-full border-0 text-sm font-normal flex items-center gap-1 transition-colors" 
+                    className="cursor-pointer bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1 rounded-md border-0 text-sm font-normal flex items-center gap-1 transition-colors" 
                     onClick={() => setTagFilter(null)}
                 >
                     {tags.find(t => t.id === tagFilter)?.name} 
@@ -205,12 +205,12 @@ function App() {
             />
           ))}
           {tickets.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-24 text-gray-400">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                  <Search className="h-8 w-8 text-gray-300" />
+            <div className="flex flex-col items-center justify-center py-24 text-muted-foreground">
+              <div className="w-16 h-16 bg-card rounded-full flex items-center justify-center mb-4 border border-border">
+                  <Search className="h-8 w-8 text-muted-foreground" />
               </div>
-              <p className="text-lg font-medium text-gray-500">暂无工单</p>
-              <p className="text-sm text-gray-400 mt-1">尝试调整搜索条件或创建一个新工单。</p>
+              <p className="text-lg font-medium text-foreground">暂无工单</p>
+              <p className="text-sm text-muted-foreground mt-1">尝试调整搜索条件或创建一个新工单。</p>
             </div>
           )}
         </div>

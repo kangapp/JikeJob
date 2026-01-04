@@ -4,6 +4,10 @@ export default {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+			fontFamily: {
+				sans: ["Inter", "San Francisco", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+				mono: ["JetBrains Mono", "Fira Code", "Menlo", "Monaco", "monospace"],
+			},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

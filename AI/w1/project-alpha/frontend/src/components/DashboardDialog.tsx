@@ -35,48 +35,48 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px] rounded-3xl p-8 border-0 shadow-2xl bg-[#f5f5f7]">
+      <DialogContent className="sm:max-w-[700px] rounded-xl p-8 border shadow-2xl bg-muted/50">
         <DialogHeader className="mb-6">
-          <DialogTitle className="text-2xl font-semibold tracking-tight text-gray-900 flex items-center gap-2">
-            <Activity className="h-6 w-6 text-blue-600" />
+          <DialogTitle className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
+            <Activity className="h-6 w-6 text-primary" />
             数据仪表盘
           </DialogTitle>
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-white border-0 shadow-sm rounded-2xl">
+          <Card className="bg-card border shadow-sm rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-500">总工单</CardTitle>
-              <BarChart3 className="h-4 w-4 text-gray-400" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">总工单</CardTitle>
+              <BarChart3 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{stats.total_tickets}</div>
+              <div className="text-3xl font-bold text-foreground">{stats.total_tickets}</div>
             </CardContent>
           </Card>
-          <Card className="bg-white border-0 shadow-sm rounded-2xl">
+          <Card className="bg-card border shadow-sm rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-500">进行中</CardTitle>
-              <Circle className="h-4 w-4 text-blue-500" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">进行中</CardTitle>
+              <Circle className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-blue-600">{stats.open_tickets}</div>
+              <div className="text-3xl font-bold text-primary">{stats.open_tickets}</div>
             </CardContent>
           </Card>
-          <Card className="bg-white border-0 shadow-sm rounded-2xl">
+          <Card className="bg-card border shadow-sm rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-500">已完成</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">已完成</CardTitle>
               <CheckCircle2 className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-green-600">{stats.closed_tickets}</div>
+              <div className="text-3xl font-bold text-green-500">{stats.closed_tickets}</div>
             </CardContent>
           </Card>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Completion Rate */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <h3 className="text-sm font-medium text-gray-500 mb-4">完成率</h3>
+            <div className="bg-card p-6 rounded-xl border shadow-sm">
+                <h3 className="text-sm font-medium text-muted-foreground mb-4">完成率</h3>
                 <div className="flex items-center justify-center py-4">
                     <div className="relative w-32 h-32">
                         <svg className="w-full h-full" viewBox="0 0 36 36">
@@ -85,7 +85,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
                                     a 15.9155 15.9155 0 0 1 0 31.831
                                     a 15.9155 15.9155 0 0 1 0 -31.831"
                                 fill="none"
-                                stroke="#f3f4f6"
+                                stroke="hsl(var(--muted))"
                                 strokeWidth="3"
                             />
                             <path
@@ -93,20 +93,20 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
                                     a 15.9155 15.9155 0 0 1 0 31.831
                                     a 15.9155 15.9155 0 0 1 0 -31.831"
                                 fill="none"
-                                stroke="#3b82f6"
+                                stroke="hsl(var(--primary))"
                                 strokeWidth="3"
                                 strokeDasharray={`${completionRate}, 100`}
                                 className="animate-[progress_1s_ease-out_forwards]"
                             />
-                            <text x="18" y="20.35" className="text-xs font-bold fill-gray-900" textAnchor="middle">{completionRate}%</text>
+                            <text x="18" y="20.35" className="text-xs font-bold fill-foreground" textAnchor="middle">{completionRate}%</text>
                         </svg>
                     </div>
                 </div>
             </div>
 
             {/* Top Tags */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm">
-                <h3 className="text-sm font-medium text-gray-500 mb-4 flex items-center gap-2">
+            <div className="bg-card p-6 rounded-xl border shadow-sm">
+                <h3 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
                     <TagIcon className="h-4 w-4" /> 热门标签 Top 5
                 </h3>
                 <div className="space-y-3">
@@ -114,13 +114,13 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
                         <div key={index} className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: tag.color || '#9ca3af' }}></span>
-                                <span className="text-sm text-gray-700">{tag.name}</span>
+                                <span className="text-sm text-foreground">{tag.name}</span>
                             </div>
-                            <span className="text-sm font-medium text-gray-900 bg-gray-100 px-2 py-0.5 rounded-md">{tag.count}</span>
+                            <span className="text-sm font-medium text-foreground bg-muted px-2 py-0.5 rounded-md">{tag.count}</span>
                         </div>
                     ))}
                     {stats.top_tags.length === 0 && (
-                        <div className="text-sm text-gray-400 text-center py-4">暂无数据</div>
+                        <div className="text-sm text-muted-foreground text-center py-4">暂无数据</div>
                     )}
                 </div>
             </div>
