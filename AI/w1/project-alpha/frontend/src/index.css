@@ -4,55 +4,24 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 221 39% 11%; /* Gray 900 #111827 */
-
-    --card: 210 20% 98%; /* Gray 50 #F9FAFB */
-    --card-foreground: 221 39% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 221 39% 11%;
-
-    --primary: 54 100% 50%; /* Duck Yellow #FFE600 */
-    --primary-foreground: 0 0% 0%; /* Black */
-
-    --secondary: 220 14% 96%; /* Gray 100 */
-    --secondary-foreground: 220 9% 46%;
-
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 8.9% 46.1%;
-
-    --accent: 220 14% 96%;
-    --accent-foreground: 220 9% 46%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 13% 91%; /* Gray 200 */
-    --input: 220 13% 91%;
-    --ring: 54 100% 50%; /* Duck Yellow */
-
-    --radius: 0.5rem; /* 8px - Modern and slightly sharp */
-  }
-
-  .dark {
+    /* Default to Dark Mode colors for "MotherDuck" style */
     --background: 0 0% 4%; /* Near Black #0A0A0A */
     --foreground: 0 0% 100%; /* White */
 
     --card: 0 0% 9%; /* Dark Gray #171717 */
     --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 9%;
+    --popover: 0 0% 9%; /* Dark Gray #171717 */
     --popover-foreground: 0 0% 100%;
 
     --primary: 54 100% 50%; /* Duck Yellow #FFE600 */
     --primary-foreground: 0 0% 0%; /* Black */
 
-    --secondary: 0 0% 14.9%;
+    --secondary: 0 0% 14.9%; /* Zinc-800 */
     --secondary-foreground: 0 0% 98%;
 
     --muted: 0 0% 14.9%;
-    --muted-foreground: 215 20% 65%; /* Gray 400 #A1A1AA */
+    --muted-foreground: 215 20% 65%; /* Zinc-400 #A1A1AA */
 
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
@@ -62,6 +31,31 @@
 
     --border: 0 0% 20%; /* #333333 */
     --input: 0 0% 20%;
+    --ring: 54 100% 50%; /* Duck Yellow */
+
+    --radius: 0.5rem; /* 8px - Matches spec (md=6px, sm=4px via calc) */
+  }
+
+  /* Light mode overrides if needed, but MotherDuck is heavily dark */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 221 39% 11%;
+    --card: 210 20% 98%;
+    --card-foreground: 221 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+    --primary: 54 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 46%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 9% 46%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 54 100% 50%;
   }
 }
@@ -75,6 +69,6 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight font-medium;
+    @apply tracking-tight font-bold;
   }
 }

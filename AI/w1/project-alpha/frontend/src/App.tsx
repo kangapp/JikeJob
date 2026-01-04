@@ -126,20 +126,22 @@ function App() {
     <div className="min-h-screen bg-background font-sans text-foreground">
       {/* Sticky Header with Blur */}
       <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-background/80 border-b border-border supports-[backdrop-filter]:bg-background/60">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div className="font-bold text-xl tracking-tight text-foreground">工单管理</div>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="font-bold text-xl tracking-tight text-foreground flex items-center gap-2">
+                <span className="text-primary">●</span> 工单管理
+            </div>
             <div className="flex items-center gap-2">
                 <Button 
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsDashboardOpen(true)}
-                    className="h-9 px-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all"
+                    className="h-9 px-4 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-all ease-snappy duration-150"
                 >
                     <BarChart3 className="mr-2 h-4 w-4" /> 仪表盘
                 </Button>
                 <Button 
                     onClick={() => setIsCreateOpen(true)} 
-                    className="h-9 px-4 text-sm font-semibold transition-all shadow-sm hover:shadow-md hover:brightness-110"
+                    className="h-9 px-4 text-sm font-semibold transition-all ease-snappy duration-150 shadow-none hover:brightness-110 active:scale-95"
                 >
                     <Plus className="mr-2 h-4 w-4" /> 新建工单
                 </Button>
@@ -147,28 +149,28 @@ function App() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
         
         {/* Search & Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4 items-center bg-card p-4 rounded-xl shadow-sm border border-border">
+        <div className="flex flex-col md:flex-row gap-4 items-center bg-card p-4 rounded-lg border border-border">
           <div className="relative flex-1 w-full">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="搜索工单..."
-              className="pl-10 h-10 rounded-lg bg-background border-border focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary transition-all text-sm"
+              className="pl-10 h-10 rounded-md bg-background border-border focus:bg-background focus:border-primary focus:ring-1 focus:ring-primary transition-all ease-snappy text-sm"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <div className="flex gap-3 w-full md:w-auto">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full md:w-[160px] h-10 rounded-lg border-border bg-background text-sm font-medium text-foreground">
+                <SelectTrigger className="w-full md:w-[160px] h-10 rounded-md border-border bg-background text-sm font-medium text-foreground focus:ring-primary">
                 <div className="flex items-center gap-2">
                     <Filter className="h-3.5 w-3.5 text-muted-foreground" />
                     <SelectValue placeholder="状态" />
                 </div>
                 </SelectTrigger>
-                <SelectContent className="rounded-lg border-border bg-popover text-popover-foreground shadow-lg">
+                <SelectContent className="rounded-md border-border bg-popover text-popover-foreground shadow-lg">
                 <SelectItem value="all">全部状态</SelectItem>
                 <SelectItem value="open">进行中</SelectItem>
                 <SelectItem value="closed">已完成</SelectItem>
@@ -179,11 +181,11 @@ function App() {
 
         {/* Tag Filter Indicator */}
         {tagFilter && (
-             <div className="flex items-center gap-3 px-2">
+             <div className="flex items-center gap-3 px-2 animate-in fade-in duration-200">
                 <span className="text-sm font-medium text-muted-foreground">当前标签筛选：</span>
                 <Badge 
                     variant="secondary" 
-                    className="cursor-pointer bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1 rounded-md border-0 text-sm font-normal flex items-center gap-1 transition-colors" 
+                    className="cursor-pointer bg-primary/10 text-primary hover:bg-primary/20 px-3 py-1 rounded-md border-0 text-sm font-normal flex items-center gap-1 transition-colors ease-snappy" 
                     onClick={() => setTagFilter(null)}
                 >
                     {tags.find(t => t.id === tagFilter)?.name} 
@@ -193,7 +195,7 @@ function App() {
         )}
 
         {/* Ticket List */}
-        <div className="grid grid-cols-1 gap-5">
+        <div className="grid grid-cols-1 gap-4">
           {tickets.map(ticket => (
             <TicketCard
               key={ticket.id}

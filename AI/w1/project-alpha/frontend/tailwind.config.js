@@ -54,7 +54,10 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+        transitionTimingFunction: {
+            'snappy': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        }
   	}
   },
   plugins: [require("tailwindcss-animate")],

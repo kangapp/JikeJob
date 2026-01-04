@@ -35,7 +35,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px] rounded-xl p-8 border shadow-2xl bg-muted/50">
+      <DialogContent className="sm:max-w-[700px] rounded-lg p-8 border border-border shadow-2xl bg-card">
         <DialogHeader className="mb-6">
           <DialogTitle className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
             <Activity className="h-6 w-6 text-primary" />
@@ -44,7 +44,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className="bg-card border shadow-sm rounded-xl">
+          <Card className="bg-background border border-border shadow-none rounded-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">总工单</CardTitle>
               <BarChart3 className="h-4 w-4 text-muted-foreground" />
@@ -53,7 +53,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
               <div className="text-3xl font-bold text-foreground">{stats.total_tickets}</div>
             </CardContent>
           </Card>
-          <Card className="bg-card border shadow-sm rounded-xl">
+          <Card className="bg-background border border-border shadow-none rounded-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">进行中</CardTitle>
               <Circle className="h-4 w-4 text-primary" />
@@ -62,7 +62,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
               <div className="text-3xl font-bold text-primary">{stats.open_tickets}</div>
             </CardContent>
           </Card>
-          <Card className="bg-card border shadow-sm rounded-xl">
+          <Card className="bg-background border border-border shadow-none rounded-lg">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">已完成</CardTitle>
               <CheckCircle2 className="h-4 w-4 text-green-500" />
@@ -75,7 +75,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Completion Rate */}
-            <div className="bg-card p-6 rounded-xl border shadow-sm">
+            <div className="bg-background p-6 rounded-lg border border-border shadow-none">
                 <h3 className="text-sm font-medium text-muted-foreground mb-4">完成率</h3>
                 <div className="flex items-center justify-center py-4">
                     <div className="relative w-32 h-32">
@@ -105,7 +105,7 @@ export function DashboardDialog({ open, onOpenChange }: DashboardDialogProps) {
             </div>
 
             {/* Top Tags */}
-            <div className="bg-card p-6 rounded-xl border shadow-sm">
+            <div className="bg-background p-6 rounded-lg border border-border shadow-none">
                 <h3 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
                     <TagIcon className="h-4 w-4" /> 热门标签 Top 5
                 </h3>
