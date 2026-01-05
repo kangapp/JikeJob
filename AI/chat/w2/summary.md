@@ -7,6 +7,9 @@
 ### 工具
 
 - memory-bank
+    - init
+    - plan
+    - implement 
 
 - spec-kit
 
